@@ -2,14 +2,17 @@ package ua.com.webtuning.logandmess;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private final String DEBAG_MAIN_TAG = MainActivity.class.getSimpleName();
     TextView tvOut;
     Button btnOk;
     Button btnCancel;
@@ -24,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnOk.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
+        Log.d(DEBAG_MAIN_TAG, "Creat Application");
     }
 
     @Override
@@ -58,9 +62,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.btnOK:
                 tvOut.setText("Button OK");
+                Toast.makeText(this, "Pressed button OK", Toast.LENGTH_LONG).show();
                 break;
             case R.id.btnCancel:
                 tvOut.setText("Button Cancel");
+                Toast.makeText(this, "Pressed button Cancel", Toast.LENGTH_LONG).show();
                 break;
         }
 
