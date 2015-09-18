@@ -43,7 +43,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        Toast.makeText(this, "Pressed " + item.getTitle(), Toast.LENGTH_LONG).show();
+        tvOut.setText("ID=" + id + " Title= " + item.getTitle());
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
