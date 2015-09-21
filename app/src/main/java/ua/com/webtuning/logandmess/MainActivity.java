@@ -15,9 +15,6 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private static final int MENU_COLOR_RED = 1;
-    private static final int MENU_COLOR_GREEN = 2;
-    private static final int MENU_COLOR_BLUE = 3;
     private static final int MENU_SIZE_22 = 4;
     private static final int MENU_SIZE_26 = 5;
     private static final int MENU_SIZE_30 = 6;
@@ -54,9 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreateContextMenu(menu, v, menuInfo);
         switch (v.getId()) {
             case R.id.tvOut:
-                menu.add(0, MENU_COLOR_RED, 1, "Red");
-                menu.add(0, MENU_COLOR_GREEN, 2, "Green");
-                menu.add(0, MENU_COLOR_BLUE, 3, "Blue");
+                getMenuInflater().inflate(R.menu.context_menu, menu);
                 break;
             case R.id.tvSize:
                 menu.add(0, MENU_SIZE_22, 1, "22");
@@ -70,14 +65,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case MENU_COLOR_RED:
+            case R.id.context_red:
                 tvOut.setTextColor(Color.RED);
                 break;
-            case MENU_COLOR_BLUE:
-                tvOut.setTextColor(Color.BLUE);
-                break;
-            case MENU_COLOR_GREEN:
+            case R.id.context_green:
                 tvOut.setTextColor(Color.GREEN);
+                break;
+            case R.id.context_blue:
+                tvOut.setTextColor(Color.BLUE);
                 break;
             // пункты меню для tvSize
             case MENU_SIZE_22:
