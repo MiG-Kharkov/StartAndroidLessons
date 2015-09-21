@@ -1,8 +1,10 @@
 package ua.com.webtuning.logandmess;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,8 +15,15 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private static final int MENU_COLOR_RED = 1;
+    private static final int MENU_COLOR_GREEN = 2;
+    private static final int MENU_COLOR_BLUE = 3;
+    private static final int MENU_SIZE_22 = 4;
+    private static final int MENU_SIZE_26 = 5;
+    private static final int MENU_SIZE_30 = 6;
     private final String DEBAG_MAIN_TAG = MainActivity.class.getSimpleName();
     TextView tvOut;
+    TextView tvSize;
     Button btnOk;
     Button btnCancel;
     CheckBox checkBox;
@@ -30,7 +39,62 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnOk.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
+
+        tvSize = (TextView) findViewById(R.id.tvSize);
+
+        tvOut.setOnCreateContextMenuListener(this);
+        tvSize.setOnCreateContextMenuListener(this);
+
         Log.d(DEBAG_MAIN_TAG, "Creat Application");
+    }
+
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        switch (v.getId()) {
+            case R.id.tvOut:
+                menu.add(0, MENU_COLOR_RED, 1, "Red");
+                menu.add(0, MENU_COLOR_GREEN, 2, "Green");
+                menu.add(0, MENU_COLOR_BLUE, 3, "Blue");
+                break;
+            case R.id.tvSize:
+                menu.add(0, MENU_SIZE_22, 1, "22");
+                menu.add(0, MENU_SIZE_26, 1, "26");
+                menu.add(0, MENU_SIZE_30, 1, "30");
+                break;
+        }
+    }
+
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case MENU_COLOR_RED:
+                tvOut.setTextColor(Color.RED);
+                break;
+            case MENU_COLOR_BLUE:
+                tvOut.setTextColor(Color.BLUE);
+                break;
+            case MENU_COLOR_GREEN:
+                tvOut.setTextColor(Color.GREEN);
+                break;
+            // пункты меню для tvSize
+            case MENU_SIZE_22:
+                tvSize.setTextSize(22);
+                tvSize.setText("Text size = 22");
+                break;
+            case MENU_SIZE_26:
+                tvSize.setTextSize(26);
+                tvSize.setText("Text size = 26");
+                break;
+            case MENU_SIZE_30:
+                tvSize.setTextSize(30);
+                tvSize.setText("Text size = 30");
+                break;
+        }
+
+        return super.onContextItemSelected(item);
     }
 
     @Override
